@@ -1,18 +1,38 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialLibModule} from './shared/material-lib.module';
+import {ReactiveFormsModule} from '@angular/forms';
+import {LoginComponent} from './views/login/login.component';
+import {SignupComponent} from './views/signup/signup.component';
+import {AuthentificationComponent} from './views/authentification/authentification.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor, authInterceptorProviders} from './helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    SignupComponent,
+    AuthentificationComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialLibModule,
+    HttpClientModule
   ],
-  providers: [],
+  exports: [
+    MaterialLibModule
+  ],
+  providers: [authInterceptorProviders],
+
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
