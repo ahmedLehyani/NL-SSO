@@ -11,6 +11,8 @@ import {SignupComponent} from './views/signup/signup.component';
 import {AuthentificationComponent} from './views/authentification/authentification.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor, authInterceptorProviders} from './helpers/auth.interceptor';
+import { RegistrationComponent } from './views/registration/registration.component';
+import { HomeComponent } from './views/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import {AuthInterceptor, authInterceptorProviders} from './helpers/auth.intercep
     LoginComponent,
     SignupComponent,
     AuthentificationComponent,
+    RegistrationComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

@@ -45,13 +45,13 @@ export class SignupComponent implements OnInit {
       (data) => {
         if (data.status === 200) {
           this.tokenStorage.saveToken(data.data.usr_token);
+          this.router.navigateByUrl('/registration');
         } else {
           this.sharedService.openSnackBar('Error', data.error);
         }
       }
     );
   }
-
 
 
 }
