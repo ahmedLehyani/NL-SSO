@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {TokenStorageService} from '../../services/token-storage.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SharedService} from '../../services/shared.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,10 +17,12 @@ export class SignupComponent implements OnInit {
 
 
   constructor(
+    private sharedService: SharedService,
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tokenStorage: TokenStorageService,
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -38,9 +43,15 @@ export class SignupComponent implements OnInit {
       this.loginForm.get('pass2')?.value
     ).subscribe(
       (data) => {
-        console.log(data);
+        if (data.status === 200) {
+          this.tokenStorage.saveToken(data.data.usr_token);
+        } else {
+          this.sharedService.openSnackBar('Error', data.error);
+        }
       }
     );
   }
+
+
 
 }
